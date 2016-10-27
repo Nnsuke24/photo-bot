@@ -96,24 +96,74 @@ class MessagesViewController: MSMessagesAppViewController {
         
         // data取得
         let task = URLSession.shared.dataTask(with: request as URLRequest) { (data, response, error) in
-            let anyObj: Any!
+            
             do {
                 if (data != nil) {
-                    anyObj = try JSONSerialization.jsonObject(with: data!, options: [])
                     print("データがありました")
-                    print("\(anyObj)")
-                    // TODO: ライブラリを活用してJson型から要素を取得する
+                    let any = try JSONSerialization.jsonObject(with: data!, options: []) as! [String: Any]
+                    print("\(any)\n")
+                    
+                    // key:dataを取り出し
+                    let dataDic = any["data"] as! [[String:Any]]
+                    print(dataDic)
+                    print("\n")
+                    
+                    // username, id の取り出し
+                    let name = dataDic[0]["username"]!
+                    print(name)
+                    let id = dataDic[0]["id"]
+                    print(id)
+                    
+//                    self.getMedia(id as! Int64)
+                    
+                    
                     
                 }else{
-                    anyObj = nil
                     print("データがありませんでした")
                 }
             } catch _ as NSError{
-                anyObj = nil
+                
             }
         }
         task.resume()
         print("タスク#resume")
     }
     
+    
+    /* メディアを取り出すメソッド */
+    func getMedia(_ id : Int64) -> Void {
+        
+        let getMediaUrl = "\(InstaConst.GET_MEDIA_URL_BEFOR)id!\(InstaConst.GET_MEDIA_URL_AFTER)\(InstaConst.ACCESS_TOKEN)"
+        let myUrl = URL(string: getMediaUrl);
+        let request = NSMutableURLRequest(url:myUrl!);
+        request.httpMethod = "GET";
+        
+        // data取得
+        let task = URLSession.shared.dataTask(with: request as URLRequest) { (data, response, error) in
+            
+            do {
+                if (data != nil) {
+                    print("データがありました")
+                    let any = try JSONSerialization.jsonObject(with: data!, options: []) as! [String: Any]
+                    print("\(any)\n")
+                    
+                    // key:dataを取り出し
+                    let dataDic = any["data"] as! [[String:Any]]
+                    print(dataDic)
+                    print("\n")
+                    
+                    // username, id の取り出し
+                    let link = dataDic[0]["link"]!
+                    print(link)
+                    
+                    
+                }else{
+                    print("データがありませんでした")
+                }
+            } catch _ as NSError{
+                
+            }
+        }
+        task.resume()
+    }
 }

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DD6AD2141DBFAFE6007EC0B1 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD6AD2131DBFAFE6007EC0B1 /* SwiftyJSON.framework */; };
+		DD6AD2191DC20858007EC0B1 /* InstaConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6AD2181DC20858007EC0B1 /* InstaConst.swift */; };
 		DD8CC7EE1DABD85200AA57FB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD8CC7ED1DABD85200AA57FB /* Assets.xcassets */; };
 		DD8CC7F51DABD85200AA57FB /* MessagesExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = DD8CC7F41DABD85200AA57FB /* MessagesExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		DD8CC7FD1DABD85200AA57FB /* MessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD8CC7FC1DABD85200AA57FB /* MessagesViewController.swift */; };
@@ -89,6 +91,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		DD6AD2131DBFAFE6007EC0B1 /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
+		DD6AD2181DC20858007EC0B1 /* InstaConst.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstaConst.swift; sourceTree = "<group>"; };
 		DD8CC7EA1DABD85200AA57FB /* photo bot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "photo bot.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD8CC7ED1DABD85200AA57FB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DD8CC7EF1DABD85200AA57FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -107,6 +111,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DD6AD2141DBFAFE6007EC0B1 /* SwiftyJSON.framework in Frameworks */,
 				DD8CC8281DAC00ED00AA57FB /* Alamofire.xcodeproj in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -114,6 +119,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DD6AD2151DC1F408007EC0B1 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				DD8CC7FE1DABD85200AA57FB /* MainInterface.storyboard */,
+			);
+			name = view;
+			sourceTree = "<group>";
+		};
+		DD6AD2161DC1F41D007EC0B1 /* View Contoroller */ = {
+			isa = PBXGroup;
+			children = (
+				DD8CC7FC1DABD85200AA57FB /* MessagesViewController.swift */,
+			);
+			name = "View Contoroller";
+			sourceTree = "<group>";
+		};
+		DD6AD2171DC20729007EC0B1 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				DD6AD2181DC20858007EC0B1 /* InstaConst.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		DD8CC7E31DABD85200AA57FB = {
 			isa = PBXGroup;
 			children = (
@@ -145,6 +174,7 @@
 		DD8CC7F81DABD85200AA57FB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DD6AD2131DBFAFE6007EC0B1 /* SwiftyJSON.framework */,
 				DD8CC80F1DAC006300AA57FB /* Alamofire.xcodeproj */,
 				DD8CC80D1DABFF4500AA57FB /* Alamofire-master */,
 				DD8CC7F91DABD85200AA57FB /* Messages.framework */,
@@ -155,8 +185,9 @@
 		DD8CC7FB1DABD85200AA57FB /* MessagesExtension */ = {
 			isa = PBXGroup;
 			children = (
-				DD8CC7FC1DABD85200AA57FB /* MessagesViewController.swift */,
-				DD8CC7FE1DABD85200AA57FB /* MainInterface.storyboard */,
+				DD6AD2151DC1F408007EC0B1 /* view */,
+				DD6AD2161DC1F41D007EC0B1 /* View Contoroller */,
+				DD6AD2171DC20729007EC0B1 /* Model */,
 				DD8CC8011DABD85200AA57FB /* Assets.xcassets */,
 				DD8CC8031DABD85200AA57FB /* Info.plist */,
 			);
@@ -204,6 +235,7 @@
 				DD8CC7F01DABD85200AA57FB /* Sources */,
 				DD8CC7F11DABD85200AA57FB /* Frameworks */,
 				DD8CC7F21DABD85200AA57FB /* Resources */,
+				DD6AD2101DBFAB65007EC0B1 /* Run Script */,
 			);
 			buildRules = (
 			);
@@ -333,12 +365,31 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		DD6AD2101DBFAB65007EC0B1 /* Run Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/SwiftyJSON.framework",
+			);
+			name = "Run Script";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks\nenv > env.txt";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		DD8CC7F01DABD85200AA57FB /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				DD8CC7FD1DABD85200AA57FB /* MessagesViewController.swift in Sources */,
+				DD6AD2191DC20858007EC0B1 /* InstaConst.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -460,6 +511,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
 				DEVELOPMENT_TEAM = 6T774LNS7X;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/photo\\ bot/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/photo\\ bot/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/photo\\ bot/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = MessagesExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
@@ -475,6 +533,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
 				DEVELOPMENT_TEAM = 6T774LNS7X;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/photo\\ bot/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/photo\\ bot/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/photo\\ bot/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = MessagesExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
