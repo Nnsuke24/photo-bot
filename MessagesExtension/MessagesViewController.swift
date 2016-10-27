@@ -135,8 +135,6 @@ class MessagesViewController: MSMessagesAppViewController {
     func getMedia(_ id : Int) -> Void {
         
         let getMediaUrl = "\(InstaConst.GET_MEDIA_URL_BEFOR)\(id)\(InstaConst.GET_MEDIA_URL_AFTER)\(InstaConst.ACCESS_TOKEN)"
-        print(getMediaUrl)
-        
         let myUrl = URL(string: getMediaUrl);
         let request = NSMutableURLRequest(url:myUrl!);
         request.httpMethod = "GET";
@@ -148,14 +146,10 @@ class MessagesViewController: MSMessagesAppViewController {
                 if (data != nil) {
                     print("データがありました")
                     let any = try JSONSerialization.jsonObject(with: data!, options: []) as! [String : Any]
-
-                    print("any作成")
                     print("\(any)\n")
                     
                     // key:dataを取り出し
                     let dataDic = any["data"] as! [[String:Any]]
-                    print(dataDic)
-                    print("\n")
                     
                     // link の取り出し
                     let link = dataDic[0]["link"]!
@@ -164,9 +158,11 @@ class MessagesViewController: MSMessagesAppViewController {
                     
                 }else{
                     print("データがありませんでした")
+                    
                 }
             } catch _ as NSError{
                 print("エラー発生")
+                
             }
         }
         task.resume()
