@@ -114,7 +114,8 @@ class MessagesViewController: MSMessagesAppViewController {
                     let id = dataDic[0]["id"]
                     print(id)
                     
-//                    self.getMedia(id as! Int64)
+                    let idStr:String = id as! String
+                    self.getMedia(Int(idStr)!)
                     
                     
                     
@@ -131,9 +132,11 @@ class MessagesViewController: MSMessagesAppViewController {
     
     
     /* メディアを取り出すメソッド */
-    func getMedia(_ id : Int64) -> Void {
+    func getMedia(_ id : Int) -> Void {
         
-        let getMediaUrl = "\(InstaConst.GET_MEDIA_URL_BEFOR)id!\(InstaConst.GET_MEDIA_URL_AFTER)\(InstaConst.ACCESS_TOKEN)"
+        let getMediaUrl = "\(InstaConst.GET_MEDIA_URL_BEFOR)\(id)\(InstaConst.GET_MEDIA_URL_AFTER)\(InstaConst.ACCESS_TOKEN)"
+        print(getMediaUrl)
+        
         let myUrl = URL(string: getMediaUrl);
         let request = NSMutableURLRequest(url:myUrl!);
         request.httpMethod = "GET";
@@ -144,7 +147,9 @@ class MessagesViewController: MSMessagesAppViewController {
             do {
                 if (data != nil) {
                     print("データがありました")
-                    let any = try JSONSerialization.jsonObject(with: data!, options: []) as! [String: Any]
+                    let any = try JSONSerialization.jsonObject(with: data!, options: []) as! [String : Any]
+
+                    print("any作成")
                     print("\(any)\n")
                     
                     // key:dataを取り出し
@@ -152,7 +157,7 @@ class MessagesViewController: MSMessagesAppViewController {
                     print(dataDic)
                     print("\n")
                     
-                    // username, id の取り出し
+                    // link の取り出し
                     let link = dataDic[0]["link"]!
                     print(link)
                     
@@ -161,7 +166,7 @@ class MessagesViewController: MSMessagesAppViewController {
                     print("データがありませんでした")
                 }
             } catch _ as NSError{
-                
+                print("エラー発生")
             }
         }
         task.resume()
